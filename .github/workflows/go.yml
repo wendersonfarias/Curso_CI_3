@@ -54,4 +54,7 @@ jobs:
     # A file, directory or wildcard pattern that describes what to upload
         path: main
 
-
+  deploy-ec2:
+    needs: build
+    uses: ./.github/workflows/EC2.yml
+    secrets: inherit
