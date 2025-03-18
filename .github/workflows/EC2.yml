@@ -29,7 +29,7 @@ jobs:
           export HOST: ${{ secrets.DB_HOST_AWS }}
           export USER: ${{ secrets.DB_USER_AWS }}
           export PASSWORD: ${{ secrets.DB_PASSWORD_AWS }}
-          export DBNAME: ${{ secrets.DBNAME_AWS }}
+          export DBNAME: ${{ secrets.DB_NAME_AWS }}
           EXPORT PORT: ${{ secrets.DB_PORT_AWS }}
           
       
