@@ -33,5 +33,6 @@ jobs:
           export DB_PORT: ${{ secrets.DB_PORT_AWS }}
           export PORT: 8000
           export SSL_MODE: require
+          nohup ./main &
           
       
