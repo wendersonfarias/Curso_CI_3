@@ -30,18 +30,21 @@ jobs:
       - name: Start Database
         run: docker compose up -d postgres
 
+      - name: Check PostgreSQL Logs
+        run: docker compose logs postgres
+
       - name: Check PostgreSQL Connection
         run: |
           echo "Verificando conexão com PostgreSQL..."
-          for i in {1..15}; do
-            if PGPASSWORD=root pg_isready -h localhost -U root -d root -p 5432; then
+          for i in {1..20}; do
+            if docker exec $(docker ps -qf "name=postgres") pg_isready -h localhost -U root -d root -p 5432; then
               echo "Conexão bem-sucedida!"
               exit 0
             fi
             echo "Tentativa $i: PostgreSQL não está pronto. Aguardando..."
             sleep 5
           done
-          echo "Erro: PostgreSQL não está respondendo após 15 tentativas."
+          echo "Erro: PostgreSQL não está respondendo após 20 tentativas."
           exit 1
 
       - name: Run Tests
