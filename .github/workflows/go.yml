@@ -78,7 +78,7 @@ jobs:
           name: programa
           path: main
 
-  deploy-ec2:
-    needs: build
-    uses: ./.github/workflows/EC2.yml
-    secrets: inherit
+  # deploy-ec2:
+  #   needs: build
+  #   uses: ./.github/workflows/EC2.yml
+  #   secrets: inherit
