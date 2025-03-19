@@ -18,15 +18,23 @@ services:
       postgres -c ssl=on
       -c ssl_cert_file=/certs/server.crt
       -c ssl_key_file=/certs/server.key 
-    
 
-  pgadmin-compose:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "wenderson@dev.com"
-      PGADMIN_DEFAULT_PASSWORD: "wenderson"
+  app:
+    image: golang:1.22
+    command:
+      - go
+      - run
+      - main.go
+    volumes:
+      - ./:/app
+    working_dir: /app
     ports:
-      - "54321:80"
+      - 8080:8080
     depends_on:
       - postgres
-
+    environment:
+      - DB_HOST=localhost
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=root
+      - DB_PORT=5432
