@@ -12,8 +12,8 @@ jobs:
     - name: Download a Build Artifact
       uses: actions/download-artifact@v4
       with:
-    # Artifact name
         name: programa
+        path: ./
 
     - uses: actions/checkout@v4
 
