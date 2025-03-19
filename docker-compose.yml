@@ -9,7 +9,14 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /postgres-data:/var/lib/postgresql/data  
+      - /postgres-data:/var/lib/postgresql/data 
+    entrypoint: |
+      sh -c '
+      mkdir -p /certs &&
+      openssl req -new -x509 -days 365 -nodes -text -out /certs/server.crt \
+        -keyout /certs/server.key -subj "/CN=postgres" &&
+      chmod 600 /certs/server.key &&
+      exec docker-entrypoint.sh postgres -c ssl=on -c ssl_cert_file=/certs/server.crt -c ssl_key_file=/certs/server.key
 
   pgadmin-compose:
     image: dpage/pgadmin4
