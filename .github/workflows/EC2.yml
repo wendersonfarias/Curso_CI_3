@@ -25,7 +25,15 @@ jobs:
         REMOTE_USER: ${{ secrets.REMOTE_USER_AWS }}
         TARGET: /home/${{ secrets.REMOTE_USER_AWS }}
         EXCLUDE: "postgres-data"
-        SCRIPT_AFTER: |
+
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST_AWS }}
+        username: ${{ secrets.REMOTE_USER_AWS }}
+        key: ${{ secrets.SSH_PRIVATE_KEY_AWS }}
+        port: 22
+        script: |
           export DB_HOST=${{ secrets.DB_HOST_AWS }}
           export DB_USER=${{ secrets.DB_USER_AWS }}
           export DB_PASSWORD=${{ secrets.DB_PASSWORD_AWS }}
@@ -38,6 +46,6 @@ jobs:
           ls -l
           
           chmod +x main
-          nohup ./main &
+          nohup ./main > nohup.out 2> nohup.err < /dev/null &
           
       
