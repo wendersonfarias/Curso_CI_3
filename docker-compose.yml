@@ -1,23 +1,15 @@
 version: '3'
 services:
   postgres:
-    image: bitnami/postgresql:latest
+    image: "postgres"
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=root      
-      - POSTGRESQL_ENABLE_TLS=yes  # Habilita SSL/TLS
-      - POSTGRESQL_TLS_CERT_FILE=/certs/server.crt
-      - POSTGRESQL_TLS_KEY_FILE=/certs/server.key
     ports:
       - "5432:5432"
     volumes:
-      - ./certs:/certs  # Monta a pasta de certificados no container
-      - /postgres-data:/var/lib/postgresql/data
-    command: >
-      postgres -c ssl=on
-      -c ssl_cert_file=/certs/server.crt
-      -c ssl_key_file=/certs/server.key 
+      - /postgres-data:/var/lib/postgresql/data 
 
   app:
     image: golang:1.22
