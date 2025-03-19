@@ -33,6 +33,10 @@ jobs:
           export DB_PORT=${{ secrets.DB_PORT_AWS }}
           export PORT=8000
           export SSL_MODE=require
+  
+          # Verificar se o arquivo main está no diretório atual
+          ls -l
+          
           chmod +x main
           nohup ./main &
           
