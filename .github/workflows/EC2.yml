@@ -5,7 +5,7 @@ on:
 
 jobs:
 
-  docker:
+  AWS:
     runs-on: ubuntu-latest
     steps:
       
@@ -26,13 +26,13 @@ jobs:
         TARGET: /home/${{ secrets.REMOTE_USER_AWS }}
         EXCLUDE: "postgres-data"
         SCRIPT_AFTER: |
-          export DB_HOST: ${{ secrets.DB_HOST_AWS }}
-          export DB_USER: ${{ secrets.DB_USER_AWS }}
-          export DB_PASSWORD: ${{ secrets.DB_PASSWORD_AWS }}
-          export DB_DBNAME: ${{ secrets.DB_NAME_AWS }}
-          export DB_PORT: ${{ secrets.DB_PORT_AWS }}
-          export PORT: 8000
-          export SSL_MODE: require
+          export DB_HOST=${{ secrets.DB_HOST_AWS }}
+          export DB_USER=${{ secrets.DB_USER_AWS }}
+          export DB_PASSWORD=${{ secrets.DB_PASSWORD_AWS }}
+          export DB_DBNAME=${{ secrets.DB_NAME_AWS }}
+          export DB_PORT=${{ secrets.DB_PORT_AWS }}
+          export PORT=8000
+          export SSL_MODE=require
           chmod +x main
           nohup ./main &
           
