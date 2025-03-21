@@ -15,7 +15,6 @@ jobs:
         name: programa
         path: ./
 
-
     - uses: actions/checkout@v4
 
     - name: Deploy to EC2
