@@ -15,8 +15,7 @@ jobs:
       DB_PORT: 5432
       DB_USER: root
       DB_PASSWORD: root
-      DB_DBNAME: root
-      SSL_MODE: disable
+      DB_NAME: root
     steps:
       - uses: actions/checkout@v4
 
