@@ -35,10 +35,14 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY_AWS }}
         port: 22
         script: |
-          # Criar um script temporário com as variáveis de ambiente
+
+          # Mudar para o diretório correto
+          cd /home/${{ secrets.REMOTE_USER_AWS }}
 
           # Garantir que o arquivo main tenha permissões de execução
           chmod +x main
+
+           # Criar um script temporário com as variáveis de ambiente
 
           echo "#!/bin/bash" > run_main.sh
           echo "export DB_HOST=${{ secrets.DB_HOST_AWS }}" >> run_main.sh
