@@ -45,9 +45,9 @@ jobs:
           DB_HOST=${{ secrets.DB_HOST_AWS }} \
           DB_USER=${{ secrets.DB_USER_AWS }} \
           DB_PASSWORD=${{ secrets.DB_PASSWORD_AWS }} \
-          DB_DBNAME=${{ secrets.DB_NAME_AWS }} \
+          DB_NAME=${{ secrets.DB_NAME_AWS }} \
           DB_PORT=${{ secrets.DB_PORT_AWS }} \
-          SSL_MODE=require \
+          
           nohup ./main > nohup.out 2> nohup.err < /dev/null &
           
       
