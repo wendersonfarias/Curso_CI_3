@@ -83,5 +83,5 @@ jobs:
 
   deploy-ec2:
     needs: build
-    uses: ./.github/workflows/EC2.yml
+    uses: ./.github/workflows/Entrega-Continua.yml
     secrets: inherit
