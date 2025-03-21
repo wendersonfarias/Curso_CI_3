@@ -35,19 +35,13 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY_AWS }}
         port: 22
         script: |
-          # Verificar se o arquivo main está no diretório atual
-          ls -l
-
-          # Dar permissão de execução ao main
+          cd /home/${{ secrets.REMOTE_USER_AWS }}
           chmod +x main
-
-          # Executar o main com as variáveis de ambiente
-          DB_HOST=${{ secrets.DB_HOST_AWS }} \
+          
+          nohup env DB_HOST=${{ secrets.DB_HOST_AWS }} \
           DB_USER=${{ secrets.DB_USER_AWS }} \
           DB_PASSWORD=${{ secrets.DB_PASSWORD_AWS }} \
           DB_NAME=${{ secrets.DB_NAME_AWS }} \
           DB_PORT=${{ secrets.DB_PORT_AWS }} \
-          
-          nohup ./main > nohup.out 2> nohup.err < /dev/null &
-          
-      
+          ./main > nohup.out 2> nohup.err < /dev/null &          
+                
