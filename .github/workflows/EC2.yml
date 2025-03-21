@@ -27,15 +27,7 @@ jobs:
         TARGET: /home/${{ secrets.REMOTE_USER_AWS }}
         EXCLUDE: "postgres-data"
 
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.REMOTE_HOST_AWS }}
-        username: ${{ secrets.REMOTE_USER_AWS }}
-        key: ${{ secrets.SSH_PRIVATE_KEY_AWS }}
-        port: 22
-        script: |
-
+        SCRIPT_AFTER: |
           # Mudar para o diretório correto
           cd /home/${{ secrets.REMOTE_USER_AWS }}
 
@@ -50,10 +42,12 @@ jobs:
           echo "export DB_PASSWORD=${{ secrets.DB_PASSWORD_AWS }}" >> run_main.sh
           echo "export DB_NAME=${{ secrets.DB_NAME_AWS }}" >> run_main.sh
           echo "export DB_PORT=${{ secrets.DB_PORT_AWS }}" >> run_main.sh
+          echo "export DB_SSLMODE=require" >> run_main.sh
           echo "./main > nohup.out 2> nohup.err < /dev/null &" >> run_main.sh
 
           # Dar permissão para o script e executá-lo
           chmod +x run_main.sh
           nohup ./run_main.sh > nohup.out 2> nohup.err < /dev/null & 
+          
 
                 
