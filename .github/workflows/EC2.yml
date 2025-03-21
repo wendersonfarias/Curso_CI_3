@@ -36,7 +36,10 @@ jobs:
         port: 22
         script: |
           # Criar um script temporário com as variáveis de ambiente
-          
+
+          # Garantir que o arquivo main tenha permissões de execução
+          chmod +x main
+
           echo "#!/bin/bash" > run_main.sh
           echo "export DB_HOST=${{ secrets.DB_HOST_AWS }}" >> run_main.sh
           echo "export DB_USER=${{ secrets.DB_USER_AWS }}" >> run_main.sh
@@ -47,5 +50,8 @@ jobs:
 
           # Dar permissão para o script e executá-lo
           chmod +x run_main.sh
-          nohup ./run_main.sh > nohup.out 2> nohup.err < /dev/null &  
+          nohup ./run_main.sh > nohup.out 2> nohup.err < /dev/null & 
+
+          # Apagar o arquivo de script após a execução
+          rm -f run_main.sh 
                 
