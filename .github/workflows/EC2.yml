@@ -56,6 +56,4 @@ jobs:
           chmod +x run_main.sh
           nohup ./run_main.sh > nohup.out 2> nohup.err < /dev/null & 
 
-          # Apagar o arquivo de script após a execução
-          rm -f run_main.sh 
                 
