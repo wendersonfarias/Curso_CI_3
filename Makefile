@@ -6,6 +6,7 @@ test:
 	echo "Testes ok!"
 
 start:
-	docker compose up -d
+	docker compose up -d --build
+
 
 ci: start lint test
