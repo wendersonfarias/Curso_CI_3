@@ -8,6 +8,8 @@ jobs:
   AWS:
     runs-on: ubuntu-latest
     steps:
+
+    - uses: actions/checkout@v4
       
     - name: Download a Build Artifact
       uses: actions/download-artifact@v4
@@ -15,7 +17,7 @@ jobs:
         name: programa
         path: ./
 
-    - uses: actions/checkout@v4
+    
 
     - name: Deploy to EC2
       uses: easingthemes/ssh-deploy@main
